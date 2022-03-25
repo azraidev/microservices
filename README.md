@@ -1,5 +1,9 @@
+Note : Change to master branch to view the source codes
+
 # microservices
 Backend services that communicate with each other
+
+The services were developed using Laravel Framework using PHP and MySQL
 
 There are three microservices which are profile,playlist and subscription.
 
