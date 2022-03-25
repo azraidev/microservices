@@ -1,8 +1,6 @@
 # microservices
 Backend services that communicate with each other
 
-To view the source codes, you can change to main branch.
-
 There are three microservices which are profile,playlist and subscription.
 
 Playlist and subscription services will ping the profile service to retrieve informations and process data.
