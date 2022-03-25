@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesTable extends Migration
+class CreateExternalServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('external_services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('auth_key');
-            $table->dateTime('expiry')->nullable();
-            $table->string('version');
+            $table->string('url',255);
+            $table->tinyInteger('enabled')->default(1);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('external_services');
     }
 }

@@ -22,7 +22,7 @@ class APIController extends Controller
         $name = 'Retrieve Profiles';
         $url = $this->urls['profile'].'/api/users';
         $method = 'GET';
-        $headers = ['api-version' => 'v1'];
+        $headers = ['api-version' => 'v1','auth_key' => env("AUTH_KEY_PROFILE")];
         $params = $request->all();
         $array = [
             'name' => $name,

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\ValidateAPIMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,16 +22,19 @@ Route::post('/generateUser', [UserController::class,'generateUser']);
 Route::post('/deleteUser', [UserController::class,'deleteUser']);
 Route::get('/selectUser/{id}', [UserController::class,'selectUser']);
 
+
 Route::group(['prefix' => 'api'], function () {
-    Route::get('users',  [UserController::class, 'showAllUsers']);
+    Route::middleware([ValidateAPIMiddleware::class])->group(function () {
+        Route::get('users',  [UserController::class, 'showAllUsers']);
 
-    Route::get('users/{id}', [UserController::class, 'showOneUser']);
+        Route::get('users/{id}', [UserController::class, 'showOneUser']);
 
-    Route::post('users', [UserController::class, 'create']);
+        Route::post('users', [UserController::class, 'create']);
 
-    Route::delete('users/{id}', [UserController::class, 'delete']);
+        Route::delete('users/{id}', [UserController::class, 'delete']);
 
-    Route::put('users/{id}', [UserController::class, 'update']);
+        Route::put('users/{id}', [UserController::class, 'update']);
+    });
 });
 
 Route::resource('userPreference', '\App\Http\Controllers\UserPreferenceController');

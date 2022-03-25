@@ -16,8 +16,7 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('public_key');
-            $table->text('secret_key');
+            $table->text('auth_key');
             $table->dateTime('expiry')->nullable();
             $table->string('version');
             $table->timestamps();

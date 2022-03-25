@@ -25,6 +25,7 @@ class SubscriptionController extends Controller
         foreach($users as $user){
             $this->stripe->charge($user);
         }
+        return 'success';
     }
 
     public function getUsers($request){

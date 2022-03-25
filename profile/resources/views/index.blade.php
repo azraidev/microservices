@@ -16,12 +16,10 @@
     @endforeach
     </select><br><br>
     <button onclick="selectUser();">Select User</button>
-    <button onclick="">Delete User</button><br><br>
 </center>
 <script>
     function selectUser(){
         var id = $("#user").val();
-        alert(id);
         window.location.href='/selectUser/'+id;
     }
 </script>

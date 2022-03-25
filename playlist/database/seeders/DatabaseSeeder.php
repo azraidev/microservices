@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(MediaTableSeeder::class);
+        $this->call(ExternalServiceTableSeeder::class);
+        $this->call(ServiceTableSeeder::class);
     }
 }

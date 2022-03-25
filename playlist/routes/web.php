@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\PlaylistController;
+use App\Http\Middleware\ValidateAPIMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +16,13 @@ use \App\Http\Controllers\PlaylistController;
 */
 
 Route::get('/', function () {
-    $random = str_pad(mt_rand(1,5), 2, "0", STR_PAD_LEFT).":".str_pad(mt_rand(0,59), 2, "0", STR_PAD_LEFT);
-    dd($random);
     return view('welcome');
 });
 
-
 Route::get('/generatePlaylist', [PlaylistController::class, 'generatePlaylist']);
+
+Route::group(['prefix' => 'api'], function () {
+    Route::middleware([ValidateAPIMiddleware::class])->group(function () {
+        Route::get('playlists',  [PlaylistController::class, 'showAllPlaylists']);
+    });
+});

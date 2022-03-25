@@ -34,18 +34,19 @@ class UserController extends Controller
         return response('Deleted Successfully', 200);
     }
 
-    public function selectUser($id){
+    public function selectUser($id,Request $request){
         $user = User::findOrFail($id);
-        return view('user',compact('user'));
+        $playlists =  $this->api->playlists($request->merge(['user_id' => $user->id]));
+        return view('user',compact('user','playlists'));
     }
 
     public function showAllUsers(Request $request)
     {
         $user_ids = $request->get('user_ids');
         if(isset($user_ids) && count($user_ids) > 0){
-            $users = User::whereIn('id',$user_ids)->get();
+            $users = User::whereIn('id',$user_ids)->with('preferences')->get();
         }else{
-            return $users = User::all();
+            return $users = User::with('preferences')->get();
         }
         return response()->json($users);
     }
